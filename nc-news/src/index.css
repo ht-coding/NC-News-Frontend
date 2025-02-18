@@ -41,4 +41,5 @@ body {
   background-color: var(--color-primary-1000);
   background-image: url(./assets/45degreee_fabric.webp); /* via toptal subtle textures */
   background-blend-mode: overlay;
+  background-attachment: fixed;
 }
