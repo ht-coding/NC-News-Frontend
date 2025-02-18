@@ -42,7 +42,7 @@ export default function ArticlesGrid({
   }, []);
   if (loading) return "loading...";
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {articles.map((article, i) => (
         <Link
           to={"/article/" + article.article_id}
