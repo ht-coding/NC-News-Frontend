@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import fetchArticles from "../api";
+import { fetchArticle, fetchArticles } from "../api";
 import { Link } from "react-router";
 
 export default function ArticlesGrid({
   sort,
   order,
-  showCategories,
+  showCategories = true,
   category,
-  limit,
-  offset,
+  limit = 12,
+  offset = 0,
+  article_id,
 }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,25 +21,52 @@ export default function ArticlesGrid({
       topic: category,
       limit,
       offset,
-    }).then((articles) => {
-      articles.forEach((article) => {
-        // bg-neutral-200 text-neutral-900 border-neutral-500
-        let colour = "neutral";
-        if (article.topic === "coding") {
-          // bg-blue-200 text-blue-900 border-blue-500
-          colour = "blue";
-        } else if (article.topic === "football") {
-          // bg-fuchsia-200 text-fuchsia-900 border-fuchsia-500
-          colour = "fuchsia";
-        } else if (article.topic === "cooking") {
-          // bg-yellow-200 text-yellow-900  border-yellow-500
-          colour = "yellow";
-        }
-        article.colour = colour;
+    })
+      .then((articles) => {
+        let hadArticle = false;
+        const filteredArticles = articles.filter((article) => {
+          if (article.article_id === +article_id) {
+            hadArticle = true;
+          }
+          return article.article_id !== +article_id;
+        });
+        if (hadArticle) {
+          console.log(+limit + +offset + 1);
+          return Promise.all([
+            filteredArticles,
+            fetchArticles({
+              sort_by: sort,
+              order,
+              topic: category,
+              limit: 1,
+              offset: +limit + +offset + 1,
+            }),
+          ]);
+        } else return [filteredArticles];
+      })
+      .then(([articles, newArticle]) => {
+        if (newArticle) articles.push(newArticle[0]);
+        return articles;
+      })
+      .then((articles) => {
+        articles.forEach((article) => {
+          // bg-neutral-200 text-neutral-900 border-neutral-500
+          let colour = "neutral";
+          if (article.topic === "coding") {
+            // bg-blue-200 text-blue-900 border-blue-500
+            colour = "blue";
+          } else if (article.topic === "football") {
+            // bg-fuchsia-200 text-fuchsia-900 border-fuchsia-500
+            colour = "fuchsia";
+          } else if (article.topic === "cooking") {
+            // bg-yellow-200 text-yellow-900  border-yellow-500
+            colour = "yellow";
+          }
+          article.colour = colour;
+        });
+        setArticles(articles);
+        setLoading(false);
       });
-      setArticles(articles);
-      setLoading(false);
-    });
   }, []);
   if (loading) return "loading...";
   return (
@@ -50,14 +78,20 @@ export default function ArticlesGrid({
           key={i}
         >
           <figure className="aspect-video overflow-clip rounded-2xl">
-            <img className="h-full w-full" src={article.article_img_url} alt={article.article_img_alt_text ?? ""}/>
+            <img
+              className="h-full w-full"
+              src={article.article_img_url}
+              alt={article.article_img_alt_text ?? ""}
+            />
           </figure>
           <p className="mt-3">
-            <span
-              className={`bg-${article.colour}-200 text-${article.colour}-900 border-${article.colour}-500 border-1 px-2 py-0.5 rounded-lg inline-block me-2`}
-            >
-              {article.topic}
-            </span>
+            {showCategories && (
+              <span
+                className={`bg-${article.colour}-200 text-${article.colour}-900 border-${article.colour}-500 border-1 px-2 py-0.5 rounded-lg inline-block me-2`}
+              >
+                {article.topic}
+              </span>
+            )}
             {article.title}
           </p>
         </Link>
