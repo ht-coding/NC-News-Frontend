@@ -40,7 +40,6 @@ export default function ArticlesGrid({
       setLoading(false);
     });
   }, []);
-  console.log("hello");
   if (loading) return "loading...";
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -48,11 +47,12 @@ export default function ArticlesGrid({
         <Link
           to={"/article/" + article.article_id}
           className="hover:opacity-90 duration-75"
+          key={i}
         >
           <figure className="aspect-video overflow-clip rounded-2xl">
             <img className="h-full w-full" src={article.article_img_url} />
           </figure>
-          <p key={i} className="mt-3">
+          <p className="mt-3">
             <span
               className={`bg-${article.colour}-200 text-${article.colour}-900 border-${article.colour}-500 border-1 px-2 py-0.5 rounded-lg inline-block me-2`}
             >
