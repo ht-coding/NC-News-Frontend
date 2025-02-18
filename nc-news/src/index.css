@@ -12,6 +12,7 @@
   --color-primary-800: oklch(39.81% 0.1904 299.13);
   --color-primary-900: oklch(33.93% 0.15627 301.46);
   --color-primary-950: oklch(30.842% 0.13938 302.6);
+  --color-primary-1000: rgb(38, 15, 60);
   --color-secondary-50: oklch(93.585% 0.03044 265.33);
   --color-secondary-100: oklch(90.321% 0.0465 266.7);
   --color-secondary-200: oklch(83.752% 0.08011 266.71);
@@ -34,4 +35,10 @@
   --color-accent-800: oklch(65.725% 0.12639 86.555);
   --color-accent-900: oklch(52.967% 0.10177 77.506);
   --color-accent-950: oklch(46.701% 0.08991 73.259);
+}
+
+body {
+  background-color: var(--color-primary-1000);
+  background-image: url(./assets/45degreee_fabric.webp); /* via toptal subtle textures */
+  background-blend-mode: overlay;
 }
