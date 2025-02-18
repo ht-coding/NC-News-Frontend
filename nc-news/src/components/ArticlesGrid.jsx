@@ -50,7 +50,7 @@ export default function ArticlesGrid({
           key={i}
         >
           <figure className="aspect-video overflow-clip rounded-2xl">
-            <img className="h-full w-full" src={article.article_img_url} />
+            <img className="h-full w-full" src={article.article_img_url} alt={article.article_img_alt_text ?? ""}/>
           </figure>
           <p className="mt-3">
             <span
