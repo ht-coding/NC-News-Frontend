@@ -48,7 +48,7 @@ export default function Comment({ commentData }) {
       <p className="whitespace-pre-wrap bg-primary-100 rounded-3xl p-5 mt-3 flex flex-col">
         {body}
         {user === author && (
-          <div className="flex gap-1 text-secondary-600 ms-auto mt-2 -mb-3 text-2xl">
+          <span className="flex gap-1 text-secondary-600 ms-auto mt-2 -mb-3 text-2xl">
             <Trash
               className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1 opacity-50 pointer-events-none"
               title="Delete Comment"
@@ -57,7 +57,7 @@ export default function Comment({ commentData }) {
               className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1 opacity-50 pointer-events-none"
               title="Edit Comment"
             />
-          </div>
+          </span>
         )}
       </p>
     </article>
