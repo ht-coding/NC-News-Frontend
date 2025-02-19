@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThumbsDown, ThumbsUp, XCircle } from "@phosphor-icons/react";
 import { patchVote } from "../api";
+import { UserContext } from "../contexts/CurrentUser";
 
-export function Vote({ id, votes, voteType }) {
+export function Vote({ id, votes, voteType, author }) {
   const [vote, setVote] = useState(0);
   const [error, setError] = useState(null);
+  const [canVote, setCanVote] = useState(false);
+  const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     if (error) setVote(0);
+    if (user !== author) setCanVote(true);
   }, [error]);
   return (
     <>
@@ -24,27 +28,37 @@ export function Vote({ id, votes, voteType }) {
         </span>
         <ThumbsUp
           onClick={() => {
-            patchVote(voteType, id, !vote).catch((error) => {
-              setError(error);
-            });
-            vote === 1 ? setVote(0) : setVote(1);
+            if (canVote) {
+              patchVote(voteType, id, !vote).catch((error) => {
+                setError(error);
+              });
+              vote === 1 ? setVote(0) : setVote(1);
+            }
           }}
           className={
-            "inline-block mx-1 text-lg hover:cursor-pointer hover:opacity-75 " +
-            (vote === 1 ? "text-green-700" : undefined)
+            "inline-block mx-1 text-lg " +
+            (vote === 1 ? "text-green-700 " : "") +
+            (canVote
+              ? "hover:cursor-pointer hover:opacity-75"
+              : "pointer-events-none opacity-50")
           }
           aria-label="upvote"
         />
         <ThumbsDown
           onClick={() => {
-            patchVote(voteType, id, !!vote).catch((error) => {
-              setError(error);
-            });
-            vote === -1 ? setVote(0) : setVote(-1);
+            if (canVote) {
+              patchVote(voteType, id, !!vote).catch((error) => {
+                setError(error);
+              });
+              vote === -1 ? setVote(0) : setVote(-1);
+            }
           }}
           className={
-            "inline-block text-lg hover:cursor-pointer hover:opacity-75 " +
-            (vote === -1 ? "text-red-700" : undefined)
+            "inline-block text-lg " +
+            (vote === -1 ? "text-red-700 " : "") +
+            (canVote
+              ? "hover:cursor-pointer hover:opacity-75"
+              : "pointer-events-none opacity-50")
           }
           aria-label="downvote"
         />
