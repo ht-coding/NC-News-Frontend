@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { fetchUserInfo } from "../api";
-import { Link, ThumbsUp } from "@phosphor-icons/react";
+import { Link, ThumbsDown, ThumbsUp } from "@phosphor-icons/react";
 
 export default function Comment({ commentData }) {
   const { comment_id, body, author, votes, created_at } = commentData;
@@ -35,9 +35,16 @@ export default function Comment({ commentData }) {
             {new Date(created_at).toLocaleDateString()}
           </a>
         </div>
-        <div className="ms-auto me-10 text-xl my-auto cursor-default w-15">
-          <ThumbsUp className="inline-block me-1" />
-          {votes}
+        <div className="ms-auto me-5 text-md my-auto cursor-default flex items-center">
+          <span
+            className={
+              votes !== 0 && (votes >= 0 ? "text-green-700" : "text-red-700")
+            }
+          >
+            {votes}
+          </span>
+          <ThumbsUp className="inline-block mx-1 text-lg" aria-label="upvote" />
+          <ThumbsDown className="inline-block text-lg" aria-label="downvote" />
         </div>
       </header>
       <p className="whitespace-pre-wrap bg-primary-100 rounded-3xl p-5 mt-3">
