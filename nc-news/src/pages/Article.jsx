@@ -52,7 +52,7 @@ export default function Article() {
         alt_text={article.article_img_alt_text}
       />
       <article className="whitespace-pre-wrap">{article.body}</article>
-      <div className="mt-5 flex">
+      <div className="mt-5 flex justify-center items-center relative">
         {comments.length} Comments
         <Vote
           id={article_id}

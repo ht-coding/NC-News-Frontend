@@ -18,7 +18,7 @@ export default function Comment({ commentData }) {
   if (loading) return "loading...";
   return (
     <article className="my-5" id={"comment-" + comment_id}>
-      <header className="flex gap-2">
+      <header className="flex gap-2 relative justify-center">
         <picture className="block aspect-square rounded-full overflow-clip h-15 bg-accent-50 border-3 border-primary-200">
           <img
             src={userData.avatar_url}
