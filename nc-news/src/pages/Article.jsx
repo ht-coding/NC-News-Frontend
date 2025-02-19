@@ -4,6 +4,7 @@ import { fetchSingleArticle } from "../api";
 import Header from "../components/article/Header";
 import Banner from "../components/article/Banner";
 import ArticlesGrid from "../components/ArticlesGrid";
+import CommentsList from "../components/CommentsList";
 
 export default function Article() {
   const { article_id } = useParams();
@@ -37,6 +38,8 @@ export default function Article() {
         alt_text={article.article_img_alt_text}
       />
       <article className="whitespace-pre-wrap">{article.body}</article>
+      <hr className="border-primary-100 my-10" />
+      <CommentsList article_id={article_id} />
       <hr className="border-primary-100 my-10" />
       <h2 className="text-3xl mb-3 capitalize">
         More articles about {article.topic}
