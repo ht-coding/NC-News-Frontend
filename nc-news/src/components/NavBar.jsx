@@ -5,16 +5,15 @@ import { UserContext } from "../contexts/CurrentUser";
 import { fetchUserInfo } from "../api";
 
 export default function NavBar() {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     fetchUserInfo(user).then((response) => {
       setUserData(response);
       setLoading(false);
     });
-  });
+  }, []);
   if (loading) return null;
   return (
     <>
@@ -38,7 +37,7 @@ export default function NavBar() {
             </picture>
           </summary>
           <div className="absolute right-0 bg-primary-100 shadow p-3 rounded-2xl mt-5">
-            <div class="bg-primary-100 clip-bottom h-3 w-3 absolute -top-2.5 right-3"></div>
+            <div className="bg-primary-100 clip-bottom h-3 w-3 absolute -top-2.5 right-3"></div>
             <ul>
               <li className="text-xl whitespace-nowrap">Hi {userData.name}!</li>
               <li className="opacity-60">@{userData.username}</li>
