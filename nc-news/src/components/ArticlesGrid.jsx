@@ -45,7 +45,6 @@ export default function ArticlesGrid({
       })
       .catch((error) => {
         setError(error);
-        console.log(error);
       });
   }, []);
   if (error) return <>Error.</>;
