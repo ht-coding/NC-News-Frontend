@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { ThumbsDown, ThumbsUp, XCircle } from "@phosphor-icons/react";
 import { patchVote } from "../api";
 import { UserContext } from "../contexts/CurrentUser";
+import ErrorPopup from "./ErrorPopup";
 
 export function Vote({ id, votes, voteType, author }) {
   const [vote, setVote] = useState(0);
   const [error, setError] = useState(null);
   const [canVote, setCanVote] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   useEffect(() => {
     if (error) setVote(0);
     if (user !== author) setCanVote(true);
@@ -64,16 +65,10 @@ export function Vote({ id, votes, voteType, author }) {
         />
       </div>
       {error ? (
-        <div className="absolute bg-red-200 rounded-2xl p-5 z-10">
-          There was an error and your vote failed. Try check your connection.
-          <XCircle
-            weight="duotone"
-            className="inline-block text-red-800 text-2xl ms-2 -me-2 hover:cursor-pointer hover:opacity-75"
-            onClick={() => {
-              setError(null);
-            }}
-          />
-        </div>
+        <ErrorPopup
+          setError={setError}
+          message="There was an error and your vote failed. Try check your connection."
+        />
       ) : null}
     </>
   );
