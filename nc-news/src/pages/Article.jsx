@@ -4,31 +4,21 @@ import { fetchSingleArticle } from "../api";
 import Header from "../components/article/Header";
 import Banner from "../components/article/Banner";
 import ArticlesGrid from "../components/ArticlesGrid";
-import CommentsList from "../components/CommentsList";
-import { fetchComments } from "../api";
+import CommentsList from "../components/comments/CommentsList";
 import Divider from "../components/Divider";
-import { Vote } from "../components/Vote";
+import Stats from "../components/article/Stats";
+import Loader from "../components/Loader";
 
 export default function Article() {
   const { article_id } = useParams();
-
   const [article, setArticle] = useState(null);
-  const [comments, setComments] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     setLoading(true);
     fetchSingleArticle(article_id)
       .then((article) => {
         setArticle(article);
-      })
-      .then(() => {
-        return fetchComments(article_id);
-      })
-      .then((response) => {
-        setComments(response);
         setLoading(false);
       })
       .catch((error) => {
@@ -36,10 +26,8 @@ export default function Article() {
         setLoading(false);
       });
   }, [article_id]);
-
-  if (loading) return "...Loading";
+  if (loading) return <Loader />;
   if (error) return error.msg;
-
   return (
     <>
       <Header
@@ -52,17 +40,13 @@ export default function Article() {
         alt_text={article.article_img_alt_text}
       />
       <article className="whitespace-pre-wrap">{article.body}</article>
-      <div className="mt-5 flex justify-center items-center relative">
-        {comments.length} Comments
-        <Vote
-          id={article_id}
-          votes={article.votes}
-          voteType={"articles"}
-          author={article.author}
-        ></Vote>
-      </div>
+      <Stats
+        article_id={article_id}
+        votes={article.votes}
+        author={article.author}
+      />
       <Divider />
-      <CommentsList comments={comments} />
+      <CommentsList article_id={article_id} />
       <Divider />
       <h2 className="text-3xl mb-3 capitalize">
         More articles about {article.topic}
