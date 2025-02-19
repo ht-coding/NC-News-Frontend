@@ -36,7 +36,12 @@ export default function Comment({ commentData }) {
             {new Date(created_at).toLocaleDateString()}
           </a>
         </div>
-        <Vote id={comment_id} votes={votes} voteType={"comment"} />
+        <Vote
+          id={comment_id}
+          votes={votes}
+          voteType={"comment"}
+          author={author}
+        />
       </header>
       <p className="whitespace-pre-wrap bg-primary-100 rounded-3xl p-5 mt-3">
         {body}

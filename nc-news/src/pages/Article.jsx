@@ -58,6 +58,7 @@ export default function Article() {
           id={article_id}
           votes={article.votes}
           voteType={"articles"}
+          author={article.author}
         ></Vote>
       </div>
       <Divider />
