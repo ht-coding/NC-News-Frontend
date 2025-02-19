@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchArticle, fetchArticles } from "../api";
+import { fetchArticles } from "../api";
 import { Link } from "react-router";
+import filterCurrent from "../utils/filterCurrent";
+import setLabelColours from "../utils/setLabelColours";
+import Label from "./Label";
 
 export default function ArticlesGrid({
-  sort,
+  sort_by,
   order,
   showCategories = true,
   category,
@@ -13,61 +16,39 @@ export default function ArticlesGrid({
 }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
+    setError(null);
     setLoading(true);
     fetchArticles({
-      sort_by: sort,
+      sort_by,
       order,
       topic: category,
       limit,
       offset,
     })
       .then((articles) => {
-        let hadArticle = false;
-        const filteredArticles = articles.filter((article) => {
-          if (article.article_id === +article_id) {
-            hadArticle = true;
-          }
-          return article.article_id !== +article_id;
-        });
-        if (hadArticle) {
-          console.log(+limit + +offset + 1);
-          return Promise.all([
-            filteredArticles,
-            fetchArticles({
-              sort_by: sort,
-              order,
-              topic: category,
-              limit: 1,
-              offset: +limit + +offset + 1,
-            }),
-          ]);
-        } else return [filteredArticles];
-      })
-      .then(([articles, newArticle]) => {
-        if (newArticle) articles.push(newArticle[0]);
-        return articles;
+        return filterCurrent(
+          articles,
+          article_id,
+          sort_by,
+          order,
+          category,
+          limit,
+          offset
+        );
       })
       .then((articles) => {
-        articles.forEach((article) => {
-          // bg-neutral-200 text-neutral-900 border-neutral-500
-          let colour = "neutral";
-          if (article.topic === "coding") {
-            // bg-blue-200 text-blue-900 border-blue-500
-            colour = "blue";
-          } else if (article.topic === "football") {
-            // bg-fuchsia-200 text-fuchsia-900 border-fuchsia-500
-            colour = "fuchsia";
-          } else if (article.topic === "cooking") {
-            // bg-yellow-200 text-yellow-900  border-yellow-500
-            colour = "yellow";
-          }
-          article.colour = colour;
-        });
+        setLabelColours(articles);
         setArticles(articles);
         setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        console.log(error);
       });
   }, []);
+  if (error) return <>Error.</>;
   if (loading) return "loading...";
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -86,11 +67,7 @@ export default function ArticlesGrid({
           </figure>
           <p className="mt-3">
             {showCategories && (
-              <span
-                className={`bg-${article.colour}-200 text-${article.colour}-900 border-${article.colour}-500 border-1 px-2 py-0.5 rounded-lg inline-block me-2`}
-              >
-                {article.topic}
-              </span>
+              <Label category={article.topic} colour={article.colour}></Label>
             )}
             {article.title}
           </p>
