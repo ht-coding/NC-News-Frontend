@@ -25,7 +25,12 @@ export default function CommentModal({
   }, [body]);
   return (
     <div className="fixed w-screen h-screen top-0 left-0 z-50 flex items-center justify-center">
-      <div className="bg-black opacity-40 w-full h-full"></div>
+      <div
+        className="bg-black opacity-40 w-full h-full"
+        onClick={() => {
+          setShowModal(false);
+        }}
+      ></div>
       <dialog
         className="z-50 bg-primary-50 p-5 m-auto rounded-2xl max-w-200 w-full"
         open
