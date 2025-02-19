@@ -7,7 +7,7 @@ export function fetchArticles(queries) {
   });
 }
 
-export function fetchArticle(article_id) {
+export function fetchSingleArticle(article_id) {
   return baseURL.get("/articles/" + article_id).then((response) => {
     return response.data.article;
   });
