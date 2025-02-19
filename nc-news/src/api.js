@@ -29,5 +29,6 @@ export function patchVote(endpoint, id, positive) {
   const vote = positive ? 1 : -1;
   return baseURL
     .patch(`/${endpoint}/${id}`, { inc_votes: vote })
-    .then((response) => response.data.comment);
+    .then((response) => response.data.comment)
+    .catch((error) => Promise.reject(error));
 }
