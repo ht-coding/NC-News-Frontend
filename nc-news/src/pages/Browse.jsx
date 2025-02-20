@@ -13,7 +13,7 @@ export default function Browse() {
       <ArticlesGrid limit="0" category={category}></ArticlesGrid>
       <p className="text-center my-5">
         <a
-          className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-1 rounded-2xl mx-auto cursor-pointer"
+          className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-2 rounded-2xl mx-auto cursor-pointer"
           to="/"
           onClick={() => {
             navigate(-1);

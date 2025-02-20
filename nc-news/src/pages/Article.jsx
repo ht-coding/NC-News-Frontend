@@ -54,7 +54,7 @@ export default function Article() {
         limit="6"
       ></ArticlesGrid>
       <Link
-        className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-1 rounded-2xl mx-auto capitalize"
+        className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-2 rounded-2xl mx-auto mt-10 mb-5 capitalize"
         to={"/browse/" + article.topic}
       >
         View All {article.topic} Articles
