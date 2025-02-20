@@ -12,7 +12,7 @@ export default function Stats({ article_id, votes, author }) {
       setLoading(false);
     });
   }, []);
-  if (loading) return null;
+  if (loading) return <div className="h-10"></div>;
   return (
     <div className="mt-5 flex justify-center items-center relative">
       {comments.length} Comments
