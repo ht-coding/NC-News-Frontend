@@ -6,6 +6,7 @@ import setLabelColours from "../utils/setLabelColours";
 import Label from "./Label";
 import Loader from "./Loader";
 import DummyGrid from "./DummyGrid";
+import setPhotoData from "../utils/setPhotoData";
 
 export default function ArticlesGrid({
   sort_by,
@@ -41,6 +42,9 @@ export default function ArticlesGrid({
         );
       })
       .then((articles) => {
+        return Promise.all(setPhotoData(articles));
+      })
+      .then((articles) => {
         setLabelColours(articles);
         setArticles(articles);
         setLoading(false);
@@ -64,7 +68,7 @@ export default function ArticlesGrid({
             <img
               className="h-full w-full"
               src={article.article_img_url}
-              alt={article.article_img_alt_text ?? ""}
+              alt={article.alt ?? ""}
             />
           </figure>
           <p className="mt-3">

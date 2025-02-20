@@ -1,10 +1,29 @@
 import axios from "axios";
 const baseURL = axios.create({ baseURL: "https://htpncnews.onrender.com/api" });
 
+const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
+const pexelsURL = axios.create({
+  baseURL: "https://api.pexels.com/v1/photos/",
+  headers: { Authorization: apiKey },
+});
+
 export function fetchArticles(queries) {
   return baseURL
     .get("/articles", { params: queries })
     .then((response) => response.data.articles);
+}
+
+export function fetchPhotoData(photoURL) {
+  const regex = /(?<=photos\/)\d+/;
+  const photo_id = photoURL.match(regex)[0];
+  return pexelsURL.get(photo_id).then((response) => {
+    return {
+      alt: response.data.alt,
+      photo_url: response.data.url,
+      photographer: response.data.photographer,
+      photographer_url: response.data.photographer_url,
+    };
+  });
 }
 
 export function fetchSingleArticle(article_id) {
