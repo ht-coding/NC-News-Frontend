@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/CurrentUser";
 import { postComment } from "../../api";
-import ErrorPopup from "../ErrorPopup";
-import SuccessPopup from "../SuccessPopup";
+import ErrorPopup from "../popups/ErrorPopup";
+import SuccessPopup from "../popups/SuccessPopup";
 
 export default function CommentModal({
   article_id,
