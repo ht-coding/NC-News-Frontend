@@ -52,7 +52,24 @@ export default function ArticlesGrid({
         setError(error);
       });
   }, [category]);
-  if (error) return <>Error.</>;
+
+  if (error && !category)
+    return (
+      <p>
+        Couldn't load the articles. Check your internet connection and try again
+      </p>
+    );
+  if (error && category)
+    return (
+      <div className="my-auto">
+        <h1 className="text-3xl text-center">Error {error.status ?? "500"}</h1>
+        <p className="text-center mt-5">
+          {error.response
+            ? error.response.data.msg
+            : "There was a problem loading the page"}
+        </p>
+      </div>
+    );
 
   if (loading) return <DummyGrid count={+limit === 0 ? 12 : limit} />;
   return (
