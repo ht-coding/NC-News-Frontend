@@ -1,17 +1,26 @@
-import { Link } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ArticlesGrid from "../components/ArticlesGrid";
+import { useEffect } from "react";
 
 export default function Browse() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const { category } = useParams();
+  const navigate = useNavigate();
   return (
     <>
-      <ArticlesGrid limit="36"></ArticlesGrid>
+      <ArticlesGrid limit="0" category={category}></ArticlesGrid>
       <p className="text-center my-5">
-        <Link
-          className="text-primary-50 bg-primary-700 hover:bg-primary-800 px-5 py-3 rounded-2xl"
+        <a
+          className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-1 rounded-2xl mx-auto cursor-pointer"
           to="/"
+          onClick={() => {
+            navigate(-1);
+          }}
         >
-          Return to index
-        </Link>
+          Go back
+        </a>
       </p>
     </>
   );
