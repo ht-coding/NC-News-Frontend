@@ -35,10 +35,7 @@ export default function Article() {
         created_at={article.created_at}
         title={article.title}
       />
-      <Banner
-        url={article.article_img_url}
-        alt_text={article.article_img_alt_text}
-      />
+      <Banner url={article.article_img_url} />
       <article className="whitespace-pre-wrap">{article.body}</article>
       <Stats
         article_id={article_id}
