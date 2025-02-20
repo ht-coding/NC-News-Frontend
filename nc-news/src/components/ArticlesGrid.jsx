@@ -11,7 +11,6 @@ import setPhotoData from "../utils/setPhotoData";
 export default function ArticlesGrid({
   sort_by,
   order,
-  showCategories = true,
   category,
   limit = 12,
   offset = 0,
@@ -27,7 +26,7 @@ export default function ArticlesGrid({
       sort_by,
       order,
       topic: category,
-      limit,
+      limit: +limit === 0 ? 999 : limit,
       offset,
     })
       .then((articles) => {
@@ -52,33 +51,52 @@ export default function ArticlesGrid({
       .catch((error) => {
         setError(error);
       });
-  }, []);
+  }, [category]);
   if (error) return <>Error.</>;
 
-  if (loading) return <DummyGrid count={limit} />;
+  if (loading) return <DummyGrid count={+limit === 0 ? 12 : limit} />;
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {articles.map((article, i) => (
-        <Link
-          to={"/article/" + article.article_id}
-          className="hover:opacity-90 duration-75"
-          key={i}
-        >
-          <figure className="aspect-video overflow-clip rounded-2xl">
-            <img
-              className="h-full w-full"
-              src={article.article_img_url}
-              alt={article.alt ?? ""}
-            />
-          </figure>
-          <p className="mt-3">
-            {showCategories && (
-              <Label category={article.topic} colour={article.colour}></Label>
-            )}
-            {article.title}
-          </p>
-        </Link>
-      ))}
-    </section>
+    <>
+      {category ? (
+        <h1 className="text-3xl mb-5">Articles about {category}</h1>
+      ) : null}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {articles.map((article, i) => (
+          <div key={i}>
+            <Link
+              to={"/article/" + article.article_id}
+              className="hover:opacity-90 duration-75"
+            >
+              <figure className="aspect-video overflow-clip rounded-2xl">
+                <img
+                  className="h-full w-full"
+                  src={article.article_img_url}
+                  alt={article.alt ?? ""}
+                />
+              </figure>
+            </Link>
+            <p className="mt-3">
+              {!category && (
+                <Link
+                  to={"/browse/" + article.topic}
+                  className="hover:opacity-80"
+                >
+                  <Label
+                    category={article.topic}
+                    colour={article.colour}
+                  ></Label>
+                </Link>
+              )}
+              <Link
+                to={"/article/" + article.article_id}
+                className="hover:text-secondary-900 duration-75"
+              >
+                {article.title}
+              </Link>
+            </p>
+          </div>
+        ))}
+      </section>
+    </>
   );
 }
