@@ -36,7 +36,7 @@ export default function Article() {
         title={article.title}
       />
       <Banner url={article.article_img_url} />
-      <article className="whitespace-pre-wrap">{article.body}</article>
+      <article className="whitespace-pre-wrap mt-5">{article.body}</article>
       <Stats
         article_id={article_id}
         votes={article.votes}
