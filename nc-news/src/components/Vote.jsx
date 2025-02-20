@@ -15,7 +15,7 @@ export function Vote({ id, votes, voteType, author }) {
   }, [error]);
   return (
     <>
-      <div className="ms-auto me-5 text-md my-auto cursor-default flex items-center">
+      <div className="ms-auto mt-auto mb-0 me-5 text-md my-auto cursor-default flex items-center">
         <span
           className={
             votes !== 0
