@@ -42,3 +42,7 @@ export function postComment(article_id, author, body) {
       return Promise.reject(error);
     });
 }
+
+export function deleteComment(comment_id) {
+  return baseURL.delete("/comments/" + comment_id);
+}
