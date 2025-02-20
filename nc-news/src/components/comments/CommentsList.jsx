@@ -3,6 +3,7 @@ import Comment from "./Comment";
 import { fetchComments } from "../../api";
 import CommentModal from "./CommentModal";
 import Loader from "../Loader";
+import DummyComments from "./DummyComments";
 
 export default function CommentsList({ article_id }) {
   const [newComment, setNewComment] = useState(null);
@@ -11,13 +12,16 @@ export default function CommentsList({ article_id }) {
   const [comments, setComments] = useState([]);
   useEffect(() => {
     setLoading(true);
-    fetchComments(article_id).then((response) => {
-      setComments(response);
-      setLoading(false);
-      setNewComment(null);
-    });
+    fetchComments(article_id)
+      .then((response) => {
+        return setComments(response);
+      })
+      .then(() => {
+        setLoading(false);
+        setNewComment(null);
+      });
   }, [newComment]);
-  if (loading) return <Loader />;
+  if (loading && comments.length === 0) return <DummyComments />;
   return (
     <>
       <div className="flex text-lg">
