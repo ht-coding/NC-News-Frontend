@@ -4,7 +4,7 @@ export default function SuccessPopup({
   message,
   setShowModal,
   setSuccess,
-  setNewComment,
+  setNewComment = () => {},
   dismissable = true,
 }) {
   return (

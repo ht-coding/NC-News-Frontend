@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { ThumbsDown, ThumbsUp, XCircle } from "@phosphor-icons/react";
+import { ThumbsDown, ThumbsUp } from "@phosphor-icons/react";
 import { patchVote } from "../api";
 import { UserContext } from "../contexts/CurrentUser";
-import ErrorPopup from "./ErrorPopup";
+import ErrorPopup from "./popups/ErrorPopup";
 
 export function Vote({ id, votes, voteType, author }) {
   const [vote, setVote] = useState(0);
@@ -15,7 +15,7 @@ export function Vote({ id, votes, voteType, author }) {
   }, [error]);
   return (
     <>
-      <div className="ms-auto me-5 text-md my-auto cursor-default flex items-center">
+      <div className="ms-auto mt-auto mb-0 me-5 text-md my-auto cursor-default flex items-center">
         <span
           className={
             votes !== 0
