@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/browse" element={<Browse />} />
+          <Route path="/browse/:category" element={<Browse />} />
           <Route path="/article/:article_id" element={<Article />} />
           <Route path="/*" element={"Not found"} />
         </Routes>
