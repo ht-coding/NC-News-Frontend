@@ -28,7 +28,15 @@ function App() {
           <Route path="/browse" element={<Browse />} />
           <Route path="/browse/:category" element={<Browse />} />
           <Route path="/article/:article_id" element={<Article />} />
-          <Route path="/*" element={"Not found"} />
+          <Route
+            path="/*"
+            element={
+              <div className="my-auto">
+                <h1 className="text-3xl text-center">Error 404</h1>
+                <p className="my-5 text-center">Page does not exist</p>
+              </div>
+            }
+          />
         </Routes>
       </main>
     </>
