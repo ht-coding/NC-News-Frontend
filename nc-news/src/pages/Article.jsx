@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { fetchSingleArticle } from "../api";
 import Header from "../components/article/Header";
 import Banner from "../components/article/Banner";
@@ -52,8 +52,13 @@ export default function Article() {
         article_id={article_id}
         category={article.topic}
         limit="6"
-        showCategories={false}
       ></ArticlesGrid>
+      <Link
+        className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-1 rounded-2xl mx-auto capitalize"
+        to={"/browse/" + article.topic}
+      >
+        View All {article.topic} Articles
+      </Link>
     </>
   );
 }
