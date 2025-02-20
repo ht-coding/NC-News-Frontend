@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import ArticlesGrid from "../components/ArticlesGrid";
 import { useEffect } from "react";
 import StickyCollapseBar from "../components/StickyCollapseBar";
+import CategoryDescription from "../components/CategoryDescription";
 
 export default function Browse() {
   useEffect(() => {
@@ -12,6 +13,7 @@ export default function Browse() {
   return (
     <>
       <StickyCollapseBar category={category} />
+      {category ? <CategoryDescription category={category} /> : null}
       <ArticlesGrid limit="0" category={category}></ArticlesGrid>
       <p className="text-center my-5">
         <a
