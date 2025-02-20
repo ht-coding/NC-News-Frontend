@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ErrorPopup from "./ErrorPopup";
 import SuccessPopup from "./SuccessPopup";
 import { deleteComment } from "../../api";
+import Loader from "../Loader";
 
 export default function ConfirmPopup({
   comment_id,
@@ -9,10 +10,12 @@ export default function ConfirmPopup({
   setShowComment,
   setDeleted,
 }) {
+  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   function handleDeletion() {
     setShowComment(false);
+    setDeleting(true);
     deleteComment(comment_id)
       .then(() => {
         setSuccess(true);
@@ -39,20 +42,29 @@ export default function ConfirmPopup({
           Are you sure you want to delete this comment? This action cannot be
           undone.
         </p>
-        <button
-          className="text-red-900 bg-red-300 hover:bg-red-200 px-3 py-2 me-3 rounded-2xl border-0 cursor-pointer"
-          onClick={handleDeletion}
-        >
-          Delete
-        </button>
-        <button
-          className="text-primary-900 bg-primary-300 hover:bg-primary-200 px-3 py-2 rounded-2xl border-0 cursor-pointer"
-          onClick={() => {
-            setShowConfirm(false);
-          }}
-        >
-          Cancel
-        </button>
+        <div className="flex flex-wrap gap-1 items-stretch">
+          <button
+            className={
+              "text-red-900 bg-red-300 hover:bg-red-200 px-3 py-2 rounded-2xl border-0 cursor-pointer w-20" +
+              (deleting ? " pointer-events-none opacity-50" : "")
+            }
+            onClick={handleDeletion}
+          >
+            {deleting ? (
+              <Loader size={4} colour="red" label="Processing..." />
+            ) : (
+              "Delete"
+            )}
+          </button>
+          <button
+            className="text-primary-900 bg-primary-300 hover:bg-primary-200 px-3 py-2 rounded-2xl border-0 cursor-pointer"
+            onClick={() => {
+              setShowConfirm(false);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
         {(error || success) && (
           <div className="absolute top-0 left-0 bg-black opacity-30 w-full h-full z-50 rounded-2xl"></div>
         )}

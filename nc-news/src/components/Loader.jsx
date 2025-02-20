@@ -1,10 +1,20 @@
-export default function Loader() {
+export default function Loader({
+  size = 8,
+  colour = "primary",
+  label = "Loading...",
+}) {
+  // fill-primary-800
+  // fill-secondary-800
+  // fill-red-800
+  // text-primary-400
+  // text-secondary-400
+  // text-red-400
   return (
     <div className="w-full h-full flex items-center justify-center m-auto">
       <div className="m-auto" role="status">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 text-gray-200 animate-spin dark:text-primary-200 fill-primary-600"
+          className={`w-${size} h-${size} animate-spin text-${colour}-400 fill-${colour}-800`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +28,7 @@ export default function Loader() {
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only">Loading...</span>
+        <span className="sr-only">{label}</span>
       </div>
     </div>
   );
