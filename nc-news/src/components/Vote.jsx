@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { ThumbsDown, ThumbsUp, XCircle } from "@phosphor-icons/react";
+import { ThumbsDown, ThumbsUp } from "@phosphor-icons/react";
 import { patchVote } from "../api";
 import { UserContext } from "../contexts/CurrentUser";
-import ErrorPopup from "./ErrorPopup";
+import ErrorPopup from "./popups/ErrorPopup";
 
 export function Vote({ id, votes, voteType, author }) {
   const [vote, setVote] = useState(0);
