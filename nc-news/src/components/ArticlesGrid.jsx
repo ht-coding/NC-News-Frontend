@@ -4,9 +4,9 @@ import { Link } from "react-router";
 import filterCurrent from "../utils/filterCurrent";
 import setLabelColours from "../utils/setLabelColours";
 import Label from "./Label";
-import Loader from "./Loader";
 import DummyGrid from "./DummyGrid";
 import setPhotoData from "../utils/setPhotoData";
+import CategoryDescription from "./CategoryDescription";
 
 export default function ArticlesGrid({
   sort_by,
@@ -19,6 +19,7 @@ export default function ArticlesGrid({
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     setError(null);
     setLoading(true);
@@ -71,12 +72,16 @@ export default function ArticlesGrid({
       </div>
     );
 
-  if (loading) return <DummyGrid count={+limit === 0 ? 12 : limit} />;
+  if (loading)
+    return (
+      <>
+        {category ? <CategoryDescription category={category} /> : null}
+        <DummyGrid count={+limit === 0 ? 12 : limit} />
+      </>
+    );
   return (
     <>
-      {category ? (
-        <h1 className="text-3xl mb-5">Articles about {category}</h1>
-      ) : null}
+      {category ? <CategoryDescription category={category} /> : null}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {articles.map((article, i) => (
           <div key={i}>
