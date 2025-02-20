@@ -31,11 +31,14 @@ export default function ConfirmPopup({
       <div
         className="bg-black opacity-40 w-full h-full"
         onClick={() => {
-          setShowConfirm(false);
+          if (!deleting) setShowConfirm(false);
         }}
       ></div>
       <dialog
-        className="z-50 bg-primary-50 p-5 m-auto rounded-2xl max-w-200 w-full"
+        className={
+          "z-50 bg-primary-50 p-5 m-auto rounded-2xl max-w-200 w-full" +
+          (deleting ? " pointer-events-none" : "")
+        }
         open={!success}
       >
         <p className="mb-3">
@@ -59,7 +62,7 @@ export default function ConfirmPopup({
           <button
             className="text-primary-900 bg-primary-300 hover:bg-primary-200 px-3 py-2 rounded-2xl border-0 cursor-pointer"
             onClick={() => {
-              setShowConfirm(false);
+              if (!deleting) setShowConfirm(false);
             }}
           >
             Cancel

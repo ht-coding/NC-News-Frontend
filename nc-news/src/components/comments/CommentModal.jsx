@@ -29,11 +29,14 @@ export default function CommentModal({
       <div
         className="bg-black opacity-40 w-full h-full"
         onClick={() => {
-          setShowModal(false);
+          if (!posting) setShowModal(false);
         }}
       ></div>
       <dialog
-        className="z-50 bg-primary-50 p-5 m-auto rounded-2xl max-w-200 w-full"
+        className={
+          "z-50 bg-primary-50 p-5 m-auto rounded-2xl max-w-200 w-full" +
+          (posting ? " pointer-events-none" : "")
+        }
         open={!success}
       >
         <form>
@@ -77,7 +80,7 @@ export default function CommentModal({
               className="text-primary-900 bg-primary-300 hover:bg-primary-200 px-3 py-2 rounded-2xl border-0 cursor-pointer"
               onClick={(event) => {
                 event.preventDefault();
-                setShowModal(false);
+                if (!posting) setShowModal(false);
               }}
             >
               Cancel
