@@ -1,0 +1,78 @@
+import { useEffect, useState } from "react";
+import ErrorPopup from "./ErrorPopup";
+import SuccessPopup from "./SuccessPopup";
+import { deleteComment } from "../../api";
+
+export default function ConfirmPopup({
+  comment_id,
+  setShowConfirm,
+  setShowComment,
+  setDeleted,
+}) {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  function handleDeletion() {
+    setShowComment(false);
+    deleteComment(comment_id)
+      .then(() => {
+        setSuccess(true);
+        setDeleted(true);
+      })
+      .catch(() => {
+        setError(true);
+        setShowComment(true);
+      });
+  }
+  return (
+    <div className="fixed w-screen h-screen top-0 left-0 z-50 flex items-center justify-center">
+      <div
+        className="bg-black opacity-40 w-full h-full"
+        onClick={() => {
+          setShowConfirm(false);
+        }}
+      ></div>
+      <dialog
+        className="z-50 bg-primary-50 p-5 m-auto rounded-2xl max-w-200 w-full"
+        open={!success}
+      >
+        <p className="mb-3">
+          Are you sure you want to delete this comment? This action cannot be
+          undone.
+        </p>
+        <button
+          className="text-red-900 bg-red-300 hover:bg-red-200 px-3 py-2 me-3 rounded-2xl border-0 cursor-pointer"
+          onClick={handleDeletion}
+        >
+          Delete
+        </button>
+        <button
+          className="text-primary-900 bg-primary-300 hover:bg-primary-200 px-3 py-2 rounded-2xl border-0 cursor-pointer"
+          onClick={() => {
+            setShowConfirm(false);
+          }}
+        >
+          Cancel
+        </button>
+        {(error || success) && (
+          <div className="absolute top-0 left-0 bg-black opacity-30 w-full h-full z-50 rounded-2xl"></div>
+        )}
+      </dialog>
+      {error && (
+        <ErrorPopup
+          setError={setError}
+          message={
+            "Your comment could not be deleted. Check your internet connection and try again."
+          }
+        />
+      )}
+
+      {success && (
+        <SuccessPopup
+          setShowModal={setShowConfirm}
+          setSuccess={setSuccess}
+          message={"Your comment was successfully deleted."}
+        />
+      )}
+    </div>
+  );
+}
