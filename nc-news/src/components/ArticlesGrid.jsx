@@ -4,6 +4,8 @@ import { Link } from "react-router";
 import filterCurrent from "../utils/filterCurrent";
 import setLabelColours from "../utils/setLabelColours";
 import Label from "./Label";
+import Loader from "./Loader";
+import DummyGrid from "./DummyGrid";
 
 export default function ArticlesGrid({
   sort_by,
@@ -48,7 +50,8 @@ export default function ArticlesGrid({
       });
   }, []);
   if (error) return <>Error.</>;
-  if (loading) return "loading...";
+
+  if (loading) return <DummyGrid count={limit} />;
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {articles.map((article, i) => (

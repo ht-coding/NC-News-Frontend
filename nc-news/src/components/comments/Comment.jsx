@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { fetchUserInfo } from "../api";
-import { Link } from "@phosphor-icons/react";
-import { Vote } from "./Vote";
+import { useContext, useState } from "react";
+import { Link, Pencil, Trash } from "@phosphor-icons/react";
+import { fetchUserInfo } from "../../api";
+import { Vote } from "../Vote";
+import { UserContext } from "../../contexts/CurrentUser";
 
 export default function Comment({ commentData }) {
+  const { user } = useContext(UserContext);
   const { comment_id, body, author, votes, created_at } = commentData;
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ export default function Comment({ commentData }) {
       setLoading(false);
     });
   }, []);
-  if (loading) return "loading...";
+  if (loading) return null;
   return (
     <article className="my-5" id={"comment-" + comment_id}>
       <header className="flex gap-2 relative justify-center">
@@ -43,8 +45,20 @@ export default function Comment({ commentData }) {
           author={author}
         />
       </header>
-      <p className="whitespace-pre-wrap bg-primary-100 rounded-3xl p-5 mt-3">
+      <p className="whitespace-pre-wrap bg-primary-100 rounded-3xl p-5 mt-3 flex flex-col">
         {body}
+        {user === author && (
+          <span className="flex gap-1 text-secondary-600 ms-auto mt-2 -mb-3 text-2xl">
+            <Trash
+              className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1 opacity-50 pointer-events-none"
+              title="Delete Comment"
+            />
+            <Pencil
+              className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1 opacity-50 pointer-events-none"
+              title="Edit Comment"
+            />
+          </span>
+        )}
       </p>
     </article>
   );

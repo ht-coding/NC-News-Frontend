@@ -32,3 +32,13 @@ export function patchVote(endpoint, id, positive) {
     .then((response) => response.data.comment)
     .catch((error) => Promise.reject(error));
 }
+
+export function postComment(article_id, author, body) {
+  return baseURL
+    .post(`/articles/${article_id}/comments`, { body, author })
+    .catch((error) => {
+      console.log(error);
+
+      return Promise.reject(error);
+    });
+}
