@@ -13,6 +13,10 @@ export function fetchArticles(queries) {
     .then((response) => response.data.articles);
 }
 
+export function fetchCategories() {
+  return baseURL.get("/topics").then((response) => response.data.topics);
+}
+
 export function fetchPhotoData(photoURL) {
   const regex = /(?<=photos\/)\d+/;
   const photo_id = photoURL.match(regex)[0];

@@ -3,8 +3,20 @@ import Browse from "./pages/Browse";
 import Landing from "./pages/Landing";
 import { Route, Routes } from "react-router";
 import NavBar from "./components/NavBar";
+import { fetchCategories } from "./api";
+import { useContext, useEffect, useState } from "react";
+import { CategoriesContext } from "./contexts/Categories";
 
 function App() {
+  const { setCategories } = useContext(CategoriesContext);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetchCategories().then((categories) => {
+      setCategories(categories);
+      setLoading(false);
+    });
+  }, []);
+  if (loading) return null;
   return (
     <>
       <header className="bg-primary-50 px-5 py-3 flex items-center relative">
@@ -14,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/browse" element={<Browse />} />
+          <Route path="/browse/:category" element={<Browse />} />
           <Route path="/article/:article_id" element={<Article />} />
           <Route path="/*" element={"Not found"} />
         </Routes>

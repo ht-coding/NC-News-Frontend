@@ -34,11 +34,15 @@ export default function CommentsList({ article_id }) {
           Post A Comment
         </button>
       </div>
-      {comments.length === 0
-        ? "No comments have been left on this article yet."
-        : comments.map((comment) => (
-            <Comment commentData={comment} key={comment.comment_id} />
-          ))}
+      {comments.length === 0 ? (
+        <p className="text-center mt-10">
+          No comments have been left on this article yet.
+        </p>
+      ) : (
+        comments.map((comment) => (
+          <Comment commentData={comment} key={comment.comment_id} />
+        ))
+      )}
       {showModal && (
         <CommentModal
           setShowModal={setShowModal}
