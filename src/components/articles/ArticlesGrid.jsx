@@ -9,6 +9,8 @@ import setPhotoData from "../../utils/setPhotoData";
 import Error from "../Error";
 
 export default function ArticlesGrid({
+  forced_sort_by = "created_at",
+  forced_order = "desc",
   category,
   limit = 12,
   offset = 0,
@@ -21,8 +23,8 @@ export default function ArticlesGrid({
   useEffect(() => {
     setError(null);
     setLoading(true);
-    const sort_by = searchParams.get("sort_by");
-    const order = searchParams.get("order");
+    const sort_by = searchParams.get("sort_by") ?? forced_sort_by;
+    const order = searchParams.get("order") ?? forced_order;
     fetchArticles({
       sort_by,
       order,

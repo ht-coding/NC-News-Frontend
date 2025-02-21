@@ -7,7 +7,7 @@ export default function Landing() {
     <>
       <section>
         <h1 className="text-3xl mb-3">Top Articles</h1>
-        <ArticlesGrid sort_by="votes" limit="6"></ArticlesGrid>
+        <ArticlesGrid forced_sort_by="votes" limit="6"></ArticlesGrid>
       </section>
       <p className="text-center mb-5">
         <Link
