@@ -2,13 +2,7 @@ import { Link } from "react-router";
 import CategorySelect from "./CategorySelect";
 import OrderControls from "./OrderControls";
 import { ArrowLeft, LineVertical } from "@phosphor-icons/react";
-export default function SortAndFilterControls({
-  setGridSort,
-  setGridDescending,
-  setSearchParams,
-  searchParams,
-  category,
-}) {
+export default function SortAndFilterControls({ category }) {
   return (
     <div className="flex flex-wrap gap-2 justify-between w-full">
       {!category ? (
@@ -21,12 +15,7 @@ export default function SortAndFilterControls({
           <ArrowLeft className="inline-block" /> All categories
         </Link>
       )}
-      <OrderControls
-        setGridSort={setGridSort}
-        setGridDescending={setGridDescending}
-        setSearchParams={setSearchParams}
-        searchParams={searchParams}
-      />
+      <OrderControls />
     </div>
   );
 }

@@ -10,29 +10,11 @@ export default function Browse() {
   }, []);
   const { category } = useParams();
   const navigate = useNavigate();
-  const [gridSort, setGridSort] = useState();
-  const [gridDescending, setGridDescending] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
-  useEffect(() => {
-    setGridSort(searchParams.get("sort_by") ?? "created_at");
-    setGridDescending(searchParams.get("order") ?? "desc");
-  }, [searchParams, gridSort, gridDescending]);
   return (
     <>
-      <StickyCollapseBar
-        setGridDescending={setGridDescending}
-        setGridSort={setGridSort}
-        setSearchParams={setSearchParams}
-        searchParams={searchParams}
-        category={category}
-      />
+      <StickyCollapseBar category={category} />
       {category ? <CategoryDescription category={category} /> : null}
-      <ArticlesGrid
-        limit="0"
-        category={category}
-        sort_by={gridSort}
-        descending={gridDescending}
-      ></ArticlesGrid>
+      <ArticlesGrid limit="0" category={category}></ArticlesGrid>
       <p className="text-center my-5">
         <a
           className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-2 rounded-2xl mx-auto cursor-pointer"

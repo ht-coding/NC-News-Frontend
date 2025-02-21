@@ -6,21 +6,17 @@ import {
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-export default function OrderControls({
-  setGridDescending,
-  setGridSort,
-  setSearchParams,
-  searchParams,
-}) {
-  const [descending, setDescending] = useState(true);
+export default function OrderControls() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [descending, setDescending] = useState(
+    searchParams.get("order") ? searchParams.get("order") === "desc" : true
+  );
   const [sortBy, setSortBy] = useState(
     searchParams.get("sort_by") ?? "created_at"
   );
   useEffect(() => {
     if (sortBy) {
       setSearchParams({ sort_by: sortBy, order: descending ? "desc" : "asc" });
-      setGridDescending(descending);
-      setGridSort(sortBy);
     }
   }, [sortBy, descending]);
   return (

@@ -2,13 +2,7 @@ import { List, X } from "@phosphor-icons/react";
 import { useState } from "react";
 import SortAndFilterControls from "./SortAndFilterControls";
 
-export default function StickyCollapseBar({
-  category,
-  setGridSort,
-  setGridDescending,
-  searchParams,
-  setSearchParams,
-}) {
+export default function StickyCollapseBar({ category }) {
   const [showBar, setShowBar] = useState(true);
 
   return (
@@ -18,15 +12,7 @@ export default function StickyCollapseBar({
         (showBar ? " pt-3 pb-4" : " pt-4 pb-3 px-1")
       }
     >
-      {showBar ? (
-        <SortAndFilterControls
-          setGridSort={setGridSort}
-          setGridDescending={setGridDescending}
-          setSearchParams={setSearchParams}
-          searchParams={searchParams}
-          category={category}
-        />
-      ) : null}
+      {showBar ? <SortAndFilterControls category={category} /> : null}
       <button
         className={
           "-me-8 text-2xl text-primary-500 cursor-pointer" +
