@@ -28,7 +28,7 @@ function App() {
         setLoading(false);
       })
       .catch((error) => {
-        <Error title={error.error} message={error.msg} />;
+        setError(error);
         setLoading(false);
       });
   }, []);
