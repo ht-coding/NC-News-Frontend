@@ -8,6 +8,7 @@ import CommentsList from "../components/comments/CommentsList";
 import Divider from "../components/Divider";
 import Stats from "../components/article/Stats";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 export default function Article() {
   const { article_id } = useParams();
@@ -22,12 +23,12 @@ export default function Article() {
         setLoading(false);
       })
       .catch((error) => {
-        setError(error.response.data);
+        setError(error);
         setLoading(false);
       });
   }, [article_id]);
   if (loading) return <Loader />;
-  if (error) return error.msg;
+  if (error) return <Error title={error.error} message={error.msg} />;
   return (
     <>
       <Header
