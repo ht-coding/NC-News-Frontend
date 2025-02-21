@@ -15,7 +15,7 @@ export function Vote({ id, votes, voteType, author }) {
   }, [error]);
   return (
     <>
-      <div className="ms-auto mt-auto mb-0 me-5 text-md my-auto cursor-default flex items-center">
+      <section className="ms-auto mt-auto mb-0 me-5 text-md my-auto cursor-default flex items-center">
         <span
           className={
             votes !== 0
@@ -63,7 +63,7 @@ export function Vote({ id, votes, voteType, author }) {
           }
           aria-label="downvote"
         />
-      </div>
+      </section>
       {error ? (
         <ErrorPopup
           setError={setError}
