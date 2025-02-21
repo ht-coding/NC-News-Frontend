@@ -5,7 +5,7 @@ import { CategoriesContext } from "../../contexts/Categories";
 export default function CategorySelect() {
   const { categories } = useContext(CategoriesContext);
   return (
-    <nav className="flex gap-1">
+    <nav className="flex gap-1 flex-wrap">
       <p className="text-lg">Categories:</p>
       {categories.map((category) => (
         <Link

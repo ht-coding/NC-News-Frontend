@@ -42,7 +42,7 @@ function App() {
     );
   if (loading)
     return (
-      <main className="rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
+      <main className="sm:rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
         <div className="my-auto">
           <h1 className="text-3xl text-center mb-5 mt-5">Connecting...</h1>
           <Loader size={8}></Loader>
@@ -64,7 +64,7 @@ function App() {
       <header className="bg-primary-50 px-5 py-3 flex items-center relative">
         <NavBar />
       </header>
-      <main className="rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
+      <main className="sm:rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/browse" element={<Browse />} />

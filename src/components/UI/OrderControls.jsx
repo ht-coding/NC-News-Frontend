@@ -1,6 +1,7 @@
 import {
   SortAscending as SortDescending,
   SortDescending as SortAscending,
+  LineVertical,
 } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
@@ -20,7 +21,7 @@ export default function OrderControls({ setGridDescending, setGridSort }) {
     }
   }, [sortBy, descending]);
   return (
-    <section className="flex ms-auto gap-1">
+    <section className="flex gap-1">
       <span>Sort by:</span>
       <select
         className="bg-primary-100 p-1 rounded"
@@ -45,6 +46,7 @@ export default function OrderControls({ setGridDescending, setGridSort }) {
           {descending ? "descending" : "ascending"}
         </span>
       </button>
+      <LineVertical className="my-auto hidden sm:block" />
     </section>
   );
 }

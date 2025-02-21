@@ -8,7 +8,7 @@ export default function SortAndFilterControls({
   category,
 }) {
   return (
-    <>
+    <div className="flex flex-wrap gap-2 justify-between w-full">
       {!category ? (
         <CategorySelect />
       ) : (
@@ -23,7 +23,6 @@ export default function SortAndFilterControls({
         setGridSort={setGridSort}
         setGridDescending={setGridDescending}
       />
-      <LineVertical />
-    </>
+    </div>
   );
 }
