@@ -23,13 +23,12 @@ export default function Article() {
         setLoading(false);
       })
       .catch((error) => {
-        setError(error.response ? error.response.data : {msg: error.message, error: error.code});
-        
+        setError(error);
         setLoading(false);
       });
   }, [article_id]);
   if (loading) return <Loader />;
-  if (error) return <Error title={error.error} message={error.msg}/>
+  if (error) return <Error title={error.error} message={error.msg} />;
   return (
     <>
       <Header
