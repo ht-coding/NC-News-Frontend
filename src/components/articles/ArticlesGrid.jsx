@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "../../api";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import filterCurrent from "../../utils/filterCurrent";
 import setLabelColours from "../../utils/setLabelColours";
 import Label from "../Label";
@@ -9,8 +9,6 @@ import setPhotoData from "../../utils/setPhotoData";
 import Error from "../Error";
 
 export default function ArticlesGrid({
-  sort_by,
-  order,
   category,
   limit = 12,
   offset = 0,
@@ -19,10 +17,12 @@ export default function ArticlesGrid({
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [searchParams] = useSearchParams();
   useEffect(() => {
     setError(null);
     setLoading(true);
+    const sort_by = searchParams.get("sort_by");
+    const order = searchParams.get("order");
     fetchArticles({
       sort_by,
       order,
@@ -53,7 +53,7 @@ export default function ArticlesGrid({
         setError(error);
         setLoading(false);
       });
-  }, [category]);
+  }, [category, searchParams]);
 
   if (error) return <Error title={error.error} message={error.msg} />;
   if (loading) return <DummyGrid count={+limit === 0 ? 12 : limit} />;

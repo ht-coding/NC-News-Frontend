@@ -5,7 +5,7 @@ import { CategoriesContext } from "../../contexts/Categories";
 export default function CategorySelect() {
   const { categories } = useContext(CategoriesContext);
   return (
-    <nav className="sticky top-0 bg-primary-50 py-5 -mt-5 z-50 flex items-center gap-1">
+    <nav className="flex gap-1 flex-wrap">
       <p className="text-lg">Categories:</p>
       {categories.map((category) => (
         <Link

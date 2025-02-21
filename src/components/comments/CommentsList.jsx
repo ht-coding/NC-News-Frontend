@@ -23,7 +23,7 @@ export default function CommentsList({ article_id }) {
   if (loading && comments.length === 0) return <DummyComments />;
   return (
     <>
-      <div className="flex text-lg">
+      <div className="flex text-lg mt-3">
         <button
           className="text-primary-900 bg-secondary-300 hover:bg-secondary-200 cursor-pointer px-3 py-2 rounded-2xl border-0 mx-auto"
           onClick={() => {
