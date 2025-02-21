@@ -80,7 +80,7 @@ export function patchVote(endpoint, id, positive) {
 
 export function postComment(article_id, author, body) {
   return baseURL
-    .post(`/articles/${article_id}/comments`, { body, author })
+    .post("/articles/" + article_id + "/comments", { body, author })
     .catch((error) => {
       return handleErrors(error);
     });
