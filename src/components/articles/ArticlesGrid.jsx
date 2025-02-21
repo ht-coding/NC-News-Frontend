@@ -68,7 +68,10 @@ export default function ArticlesGrid({
             <figure className="aspect-video overflow-clip rounded-2xl">
               <img
                 className="h-full w-full"
-                src={article.article_img_url}
+                src={
+                  article.src.original +
+                  "?auto=compress&cs=tinysrgb&fit=crop&h=350&w=600"
+                }
                 alt={article.alt ?? ""}
               />
             </figure>

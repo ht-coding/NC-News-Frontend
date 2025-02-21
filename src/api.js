@@ -35,6 +35,7 @@ export function fetchPhotoData(photoURL) {
       return {
         alt: response.data.alt,
         photo_url: response.data.url,
+        src: response.data.src,
         photographer: response.data.photographer,
         photographer_url: response.data.photographer_url,
       };
