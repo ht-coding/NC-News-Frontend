@@ -6,6 +6,7 @@ import setLabelColours from "../utils/setLabelColours";
 import Label from "./Label";
 import DummyGrid from "./DummyGrid";
 import setPhotoData from "../utils/setPhotoData";
+import Error from "./Error";
 
 export default function ArticlesGrid({
   sort_by,
@@ -50,27 +51,11 @@ export default function ArticlesGrid({
       })
       .catch((error) => {
         setError(error);
+        setLoading(false);
       });
   }, [category]);
 
-  if (error && !category)
-    return (
-      <p>
-        Couldn't load the articles. Check your internet connection and try again
-      </p>
-    );
-  if (error && category)
-    return (
-      <div className="my-auto">
-        <h1 className="text-3xl text-center">Error {error.status ?? "500"}</h1>
-        <p className="text-center mt-5">
-          {error.response
-            ? error.response.data.msg
-            : "There was a problem loading the page"}
-        </p>
-      </div>
-    );
-
+  if (error) return <Error title={error.error} message={error.msg} />;
   if (loading) return <DummyGrid count={+limit === 0 ? 12 : limit} />;
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
