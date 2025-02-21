@@ -12,26 +12,43 @@ import Error from "./components/Error";
 function App() {
   const { setCategories } = useContext(CategoriesContext);
   const [loading, setLoading] = useState(true);
+  const [tries, setTries] = useState(0);
   const [error, setError] = useState(null);
   const [slowStart, setSlowStart] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setSlowStart(true);
+      setTries(1);
     }, 3000);
     return () => clearTimeout(timer);
   }, [loading]);
   useEffect(() => {
-    fetchCategories()
-      .then((categories) => {
-        setCategories(categories);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
+    if (tries === 24) {
+      setError({
+        error: "Connection failed",
+        msg: "Could not reach the database.",
       });
-  }, []);
+    }
+    let interval;
+    if (loading) {
+      fetchCategories()
+        .then((categories) => {
+          setCategories(categories);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setLoading(false);
+        });
+      if (tries > 0) {
+      }
+      interval = setInterval(() => {
+        setTries(tries + 1);
+      }, 5000);
+    }
+    return () => clearInterval(interval);
+  }, [tries]);
   if (error)
     return (
       <main className="rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
