@@ -15,7 +15,7 @@ export default function StickyCollapseBar({ category }) {
       {showBar ? <SortAndFilterControls category={category} /> : null}
       <button
         className={
-          "-me-8 text-2xl text-primary-500 cursor-pointer" +
+          "lg:hidden -me-8 text-2xl text-primary-500 cursor-pointer" +
           (!showBar ? " ms-auto" : "")
         }
         onClick={() => {

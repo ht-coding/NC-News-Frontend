@@ -45,7 +45,7 @@ export default function OrderControls() {
           {descending ? "descending" : "ascending"}
         </span>
       </button>
-      <LineVertical className="my-auto hidden sm:block" />
+      <LineVertical className="my-auto hidden sm:block lg:hidden" />
     </section>
   );
 }
