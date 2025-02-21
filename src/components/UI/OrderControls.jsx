@@ -12,7 +12,6 @@ export default function OrderControls({ setGridDescending, setGridSort }) {
   const [sortBy, setSortBy] = useState(
     searchParams.get("sort_by") ?? "created_at"
   );
-  console.log(searchParams);
   useEffect(() => {
     if (sortBy) {
       setSearchParams({ sort_by: sortBy, order: descending ? "desc" : "asc" });
