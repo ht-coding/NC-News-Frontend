@@ -1,4 +1,4 @@
-import { Books } from "@phosphor-icons/react";
+import { NewspaperClipping } from "@phosphor-icons/react";
 import { Link } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/CurrentUser";
@@ -22,7 +22,7 @@ export default function NavBar() {
           className="flex items-center text-secondary-800 hover:text-primary-500"
           to="/"
         >
-          <Books className="me-1 text-3xl" weight="fill" /> NC News
+          <NewspaperClipping className="me-1 text-3xl" weight="fill" /> NC News
         </Link>
       </nav>
       <div className="ms-auto me-0 ">
