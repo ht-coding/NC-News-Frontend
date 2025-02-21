@@ -58,13 +58,16 @@ export default function Comment({ commentData }) {
           {body}
           {user === author && (
             <span className="flex gap-1 text-secondary-600 ms-auto mt-2 -mb-3 text-2xl">
-              <Trash
-                className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1"
-                title="Delete Comment"
+              <button
                 onClick={() => {
                   setShowConfirm(true);
                 }}
-              />
+              >
+                <Trash
+                  className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1"
+                  title="Delete Comment"
+                />
+              </button>
               <Pencil
                 className="cursor-pointer hover:text-primary-900 hover:bg-primary-200 rounded-full p-1 opacity-50 pointer-events-none"
                 title="Edit Comment"

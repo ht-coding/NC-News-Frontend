@@ -27,7 +27,7 @@ export function Vote({ id, votes, voteType, author }) {
         >
           {votes + vote}
         </span>
-        <ThumbsUp
+        <button
           onClick={() => {
             if (canVote) {
               patchVote(voteType, id, !vote).catch((error) => {
@@ -36,16 +36,19 @@ export function Vote({ id, votes, voteType, author }) {
               vote === 1 ? setVote(0) : setVote(1);
             }
           }}
-          className={
-            "inline-block mx-1 text-lg " +
-            (vote === 1 ? "text-green-700 " : "") +
-            (canVote
-              ? "hover:cursor-pointer hover:opacity-75"
-              : "pointer-events-none opacity-50")
-          }
-          aria-label="upvote"
-        />
-        <ThumbsDown
+        >
+          <ThumbsUp
+            className={
+              "inline-block mx-1 text-lg " +
+              (vote === 1 ? "text-green-700 " : "") +
+              (canVote
+                ? "hover:cursor-pointer hover:opacity-75"
+                : "pointer-events-none opacity-50")
+            }
+            aria-label="upvote"
+          />
+        </button>
+        <button
           onClick={() => {
             if (canVote) {
               patchVote(voteType, id, !!vote).catch((error) => {
@@ -54,15 +57,18 @@ export function Vote({ id, votes, voteType, author }) {
               vote === -1 ? setVote(0) : setVote(-1);
             }
           }}
-          className={
-            "inline-block text-lg " +
-            (vote === -1 ? "text-red-700 " : "") +
-            (canVote
-              ? "hover:cursor-pointer hover:opacity-75"
-              : "pointer-events-none opacity-50")
-          }
-          aria-label="downvote"
-        />
+        >
+          <ThumbsDown
+            className={
+              "inline-block text-lg " +
+              (vote === -1 ? "text-red-700 " : "") +
+              (canVote
+                ? "hover:cursor-pointer hover:opacity-75"
+                : "pointer-events-none opacity-50")
+            }
+            aria-label="downvote"
+          />
+        </button>
       </section>
       {error ? (
         <ErrorPopup
