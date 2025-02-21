@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchArticles } from "../api";
+import { fetchArticles } from "../../api";
 import { Link } from "react-router";
-import filterCurrent from "../utils/filterCurrent";
-import setLabelColours from "../utils/setLabelColours";
-import Label from "./Label";
-import DummyGrid from "./DummyGrid";
-import setPhotoData from "../utils/setPhotoData";
-import Error from "./Error";
+import filterCurrent from "../../utils/filterCurrent";
+import setLabelColours from "../../utils/setLabelColours";
+import Label from "../Label";
+import DummyGrid from "../DummyGrid";
+import setPhotoData from "../../utils/setPhotoData";
+import Error from "../Error";
 
 export default function ArticlesGrid({
   sort_by,

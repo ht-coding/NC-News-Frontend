@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import ArticlesGrid from "../components/ArticlesGrid";
+import ArticlesGrid from "../components/articles/ArticlesGrid";
 import Divider from "../components/Divider";
 
 export default function Landing() {

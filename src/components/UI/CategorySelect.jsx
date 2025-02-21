@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router";
-import { CategoriesContext } from "../contexts/Categories";
+import { CategoriesContext } from "../../contexts/Categories";
 
 export default function CategorySelect() {
   const { categories } = useContext(CategoriesContext);

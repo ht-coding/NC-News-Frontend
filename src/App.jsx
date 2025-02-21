@@ -2,11 +2,11 @@ import Article from "./pages/Article";
 import Browse from "./pages/Browse";
 import Landing from "./pages/Landing";
 import { Route, Routes } from "react-router";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/UI/NavBar";
 import { fetchCategories } from "./api";
 import { useContext, useEffect, useState } from "react";
 import { CategoriesContext } from "./contexts/Categories";
-import Loader from "./components/Loader";
+import Loader from "./components/UI/Loader";
 import Error from "./components/Error";
 
 function App() {

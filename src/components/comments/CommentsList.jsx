@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { fetchComments } from "../../api";
 import CommentModal from "./CommentModal";
-import Loader from "../Loader";
 import DummyComments from "./DummyComments";
 
 export default function CommentsList({ article_id }) {
