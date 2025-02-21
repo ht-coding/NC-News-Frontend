@@ -6,6 +6,8 @@ export default function StickyCollapseBar({
   category,
   setGridSort,
   setGridDescending,
+  searchParams,
+  setSearchParams,
 }) {
   const [showBar, setShowBar] = useState(true);
 
@@ -20,6 +22,8 @@ export default function StickyCollapseBar({
         <SortAndFilterControls
           setGridSort={setGridSort}
           setGridDescending={setGridDescending}
+          setSearchParams={setSearchParams}
+          searchParams={searchParams}
           category={category}
         />
       ) : null}

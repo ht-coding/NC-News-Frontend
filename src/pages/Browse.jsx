@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import ArticlesGrid from "../components/articles/ArticlesGrid";
 import { useEffect, useState } from "react";
 import StickyCollapseBar from "../components/UI/StickyCollapseBar";
@@ -12,11 +12,15 @@ export default function Browse() {
   const navigate = useNavigate();
   const [gridSort, setGridSort] = useState("created_at");
   const [gridDescending, setGridDescending] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {}, [searchParams]);
   return (
     <>
       <StickyCollapseBar
         setGridDescending={setGridDescending}
         setGridSort={setGridSort}
+        setSearchParams={setSearchParams}
+        searchParams={searchParams}
         category={category}
       />
       {category ? <CategoryDescription category={category} /> : null}

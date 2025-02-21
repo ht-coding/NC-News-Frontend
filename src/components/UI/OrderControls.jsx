@@ -6,9 +6,13 @@ import {
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-export default function OrderControls({ setGridDescending, setGridSort }) {
+export default function OrderControls({
+  setGridDescending,
+  setGridSort,
+  setSearchParams,
+  searchParams,
+}) {
   const [descending, setDescending] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState(
     searchParams.get("sort_by") ?? "created_at"
   );

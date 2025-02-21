@@ -5,6 +5,8 @@ import { ArrowLeft, LineVertical } from "@phosphor-icons/react";
 export default function SortAndFilterControls({
   setGridSort,
   setGridDescending,
+  setSearchParams,
+  searchParams,
   category,
 }) {
   return (
@@ -22,6 +24,8 @@ export default function SortAndFilterControls({
       <OrderControls
         setGridSort={setGridSort}
         setGridDescending={setGridDescending}
+        setSearchParams={setSearchParams}
+        searchParams={searchParams}
       />
     </div>
   );
