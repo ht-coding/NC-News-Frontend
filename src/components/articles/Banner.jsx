@@ -17,8 +17,32 @@ export default function Banner({ url }) {
   return (
     <figure>
       <picture className="overflow-clip aspect-2/1 md:aspect-3/1 lg:aspect-3.5/1 block rounded-t-3xl mt-3">
+        <source
+          srcset={
+            photoData.src.original +
+            "?auto=compress&cs=tinysrgb&fit=crop&h=100&w=300"
+          }
+          media="(max-width: 300px)"
+        />
+        <source
+          srcset={
+            photoData.src.original +
+            "?auto=compress&cs=tinysrgb&fit=crop&h=200&w=600"
+          }
+          media="(max-width: 600px)"
+        />
+        <source
+          srcset={
+            photoData.src.original +
+            "?auto=compress&cs=tinysrgb&fit=crop&h=300&w=900"
+          }
+          media="(max-width: 900px)"
+        />
         <img
-          src={url}
+          src={
+            photoData.src.original +
+            "?auto=compress&cs=tinysrgb&fit=crop&h=400&w=1200"
+          }
           className="object-cover w-full h-full"
           alt={photoData.alt}
         />
