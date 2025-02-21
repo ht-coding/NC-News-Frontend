@@ -4,13 +4,13 @@ import { Link } from "react-router";
 import filterCurrent from "../utils/filterCurrent";
 import setLabelColours from "../utils/setLabelColours";
 import Label from "./Label";
-import Loader from "./Loader";
 import DummyGrid from "./DummyGrid";
+import setPhotoData from "../utils/setPhotoData";
+import CategoryDescription from "./CategoryDescription";
 
 export default function ArticlesGrid({
   sort_by,
   order,
-  showCategories = true,
   category,
   limit = 12,
   offset = 0,
@@ -19,6 +19,7 @@ export default function ArticlesGrid({
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     setError(null);
     setLoading(true);
@@ -26,7 +27,7 @@ export default function ArticlesGrid({
       sort_by,
       order,
       topic: category,
-      limit,
+      limit: +limit === 0 ? 999 : limit,
       offset,
     })
       .then((articles) => {
@@ -41,6 +42,9 @@ export default function ArticlesGrid({
         );
       })
       .then((articles) => {
+        return Promise.all(setPhotoData(articles));
+      })
+      .then((articles) => {
         setLabelColours(articles);
         setArticles(articles);
         setLoading(false);
@@ -48,33 +52,73 @@ export default function ArticlesGrid({
       .catch((error) => {
         setError(error);
       });
-  }, []);
-  if (error) return <>Error.</>;
+  }, [category]);
 
-  if (loading) return <DummyGrid count={limit} />;
+  if (error && !category)
+    return (
+      <p>
+        Couldn't load the articles. Check your internet connection and try again
+      </p>
+    );
+  if (error && category)
+    return (
+      <div className="my-auto">
+        <h1 className="text-3xl text-center">Error {error.status ?? "500"}</h1>
+        <p className="text-center mt-5">
+          {error.response
+            ? error.response.data.msg
+            : "There was a problem loading the page"}
+        </p>
+      </div>
+    );
+
+  if (loading)
+    return (
+      <>
+        {category ? <CategoryDescription category={category} /> : null}
+        <DummyGrid count={+limit === 0 ? 12 : limit} />
+      </>
+    );
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {articles.map((article, i) => (
-        <Link
-          to={"/article/" + article.article_id}
-          className="hover:opacity-90 duration-75"
-          key={i}
-        >
-          <figure className="aspect-video overflow-clip rounded-2xl">
-            <img
-              className="h-full w-full"
-              src={article.article_img_url}
-              alt={article.article_img_alt_text ?? ""}
-            />
-          </figure>
-          <p className="mt-3">
-            {showCategories && (
-              <Label category={article.topic} colour={article.colour}></Label>
-            )}
-            {article.title}
-          </p>
-        </Link>
-      ))}
-    </section>
+    <>
+      {category ? <CategoryDescription category={category} /> : null}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {articles.map((article, i) => (
+          <div key={i}>
+            <Link
+              to={"/article/" + article.article_id}
+              className="hover:opacity-90 duration-75"
+            >
+              <figure className="aspect-video overflow-clip rounded-2xl">
+                <img
+                  className="h-full w-full"
+                  src={article.article_img_url}
+                  alt={article.alt ?? ""}
+                />
+              </figure>
+            </Link>
+            <p className="mt-3">
+              {!category && (
+                <Link
+                  to={"/browse/" + article.topic}
+                  className="hover:opacity-80"
+                >
+                  <Label
+                    category={article.topic}
+                    colour={article.colour}
+                  ></Label>
+                </Link>
+              )}
+              <Link
+                to={"/article/" + article.article_id}
+                className="hover:text-secondary-900 duration-75"
+              >
+                {article.title}
+              </Link>
+            </p>
+          </div>
+        ))}
+      </section>
+    </>
   );
 }

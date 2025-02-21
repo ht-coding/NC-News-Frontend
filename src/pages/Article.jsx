@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { fetchSingleArticle } from "../api";
 import Header from "../components/article/Header";
 import Banner from "../components/article/Banner";
@@ -35,11 +35,8 @@ export default function Article() {
         created_at={article.created_at}
         title={article.title}
       />
-      <Banner
-        url={article.article_img_url}
-        alt_text={article.article_img_alt_text}
-      />
-      <article className="whitespace-pre-wrap">{article.body}</article>
+      <Banner url={article.article_img_url} />
+      <article className="whitespace-pre-wrap mt-5">{article.body}</article>
       <Stats
         article_id={article_id}
         votes={article.votes}
@@ -55,8 +52,13 @@ export default function Article() {
         article_id={article_id}
         category={article.topic}
         limit="6"
-        showCategories={false}
       ></ArticlesGrid>
+      <Link
+        className="text-primary-900 bg-primary-300 hover:bg-primary-500 hover:text-primary-50 px-5 py-2 rounded-2xl mx-auto mt-10 mb-5 capitalize"
+        to={"/browse/" + article.topic}
+      >
+        View All {article.topic} Articles
+      </Link>
     </>
   );
 }
