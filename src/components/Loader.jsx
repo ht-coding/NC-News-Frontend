@@ -9,6 +9,8 @@ export default function Loader({
   // text-primary-400
   // text-secondary-400
   // text-red-400
+  // w-8
+  // w-4
   return (
     <div className="w-full h-full flex items-center justify-center m-auto">
       <div className="m-auto" role="status">

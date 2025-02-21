@@ -6,17 +6,42 @@ import NavBar from "./components/NavBar";
 import { fetchCategories } from "./api";
 import { useContext, useEffect, useState } from "react";
 import { CategoriesContext } from "./contexts/Categories";
+import Loader from "./components/Loader";
 
 function App() {
   const { setCategories } = useContext(CategoriesContext);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null)
+  const [slowStart, setSlowStart] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSlowStart(true)
+    }, 3000);
+    return () => clearTimeout(timer);
+
+  }, [loading]);
   useEffect(() => {
     fetchCategories().then((categories) => {
       setCategories(categories);
       setLoading(false);
+    }).catch(error => {
+      setError(error)
     });
   }, []);
-  if (loading) return null;
+  if (error) return <main className="rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
+    <div className="my-auto">
+      <h1 className="text-3xl text-center mb-5 mt-5">Something went wrong.</h1>
+      <p className={"mx-auto max-w-200 transition duration-300 my-5 text-center" + (slowStart ? " opacity-100" : " opacity-0 invisible")}>Unfortunately there was an error connecting to the database. Check your internet connection and try again.</p>
+    </div>
+</main>
+  if (loading) return <main className="rounded-2xl bg-primary-50 px-10 py-5 border-t-1 sm:border-t-0 border-primary-100 sm:mx-5 xl:mx-auto sm:mt-10 sm:mb-5 max-w-[1280px] min-h-100 flex flex-col">
+    <div className="my-auto">
+      <h1 className="text-3xl text-center mb-5 mt-5">Connecting...</h1>
+      <Loader size={8}></Loader>
+      <p className={"mx-auto max-w-200 transition duration-300 my-5 text-center" + (slowStart ? " opacity-100" : " opacity-0 invisible")}>This is taking a while. The server will spin down after 15 minutes of inactivity, so if your internet connection is working fine hang on a moment and the site will be online shortly!</p>
+    </div>
+</main>
   return (
     <>
       <header className="bg-primary-50 px-5 py-3 flex items-center relative">
