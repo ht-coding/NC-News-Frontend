@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ErrorPopup from "./ErrorPopup";
 import SuccessPopup from "./SuccessPopup";
-import { deleteComment } from "../../api";
-import Loader from "../Loader";
+import { deleteComment } from "../../../api";
+import Loader from "../../UI/Loader";
 
 export default function ConfirmPopup({
   comment_id,

@@ -1,8 +1,8 @@
 import { Books } from "@phosphor-icons/react";
 import { Link } from "react-router";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../contexts/CurrentUser";
-import { fetchUserInfo } from "../api";
+import { UserContext } from "../../contexts/CurrentUser";
+import { fetchUserInfo } from "../../api";
 
 export default function NavBar() {
   const { user } = useContext(UserContext);

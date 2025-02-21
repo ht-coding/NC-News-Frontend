@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
-import ArticlesGrid from "../components/ArticlesGrid";
+import ArticlesGrid from "../components/articles/ArticlesGrid";
 import { useEffect } from "react";
-import StickyCollapseBar from "../components/StickyCollapseBar";
+import StickyCollapseBar from "../components/UI/StickyCollapseBar";
 
 export default function Browse() {
   useEffect(() => {

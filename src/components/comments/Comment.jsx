@@ -3,7 +3,7 @@ import { Link, Pencil, Trash } from "@phosphor-icons/react";
 import { fetchUserInfo } from "../../api";
 import { Vote } from "../Vote";
 import { UserContext } from "../../contexts/CurrentUser";
-import ConfirmPopup from "../popups/ConfirmPopup";
+import ConfirmPopup from "./popups/ConfirmPopup";
 import SingleDummyComment from "./SingleDummyComment";
 
 export default function Comment({ commentData }) {

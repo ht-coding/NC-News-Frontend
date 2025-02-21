@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { fetchSingleArticle } from "../api";
-import Header from "../components/article/Header";
-import Banner from "../components/article/Banner";
-import ArticlesGrid from "../components/ArticlesGrid";
+import Header from "../components/articles/Header";
+import Banner from "../components/articles/Banner";
+import ArticlesGrid from "../components/articles/ArticlesGrid";
 import CommentsList from "../components/comments/CommentsList";
 import Divider from "../components/Divider";
-import Stats from "../components/article/Stats";
-import Loader from "../components/Loader";
+import Stats from "../components/articles/Stats";
+import Loader from "../components/UI/Loader";
 import Error from "../components/Error";
 
 export default function Article() {
