@@ -21,7 +21,7 @@ export default function Comment({ commentData }) {
       setLoading(false);
     });
   }, []);
-  if (deleted) return <></>;
+  if (deleted) return null;
   if (loading) return <SingleDummyComment />;
   return (
     <>
