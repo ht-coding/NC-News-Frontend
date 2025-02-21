@@ -8,5 +8,15 @@
 <a href="https://htncnews.netlify.app/"> <img src="https://api.netlify.com/api/v1/badges/84099366-2cd6-4922-8a0a-f39a04f2fcfe/deploy-status" alt="Netlify Status"></a>
 </p>
 
+> [!NOTE]
+> This is a full stack project. The backend repository for this project can be found here: https://github.com/captainharrie/NC-news.
+
+## Live Demo
+A demo version of the API is hosted at https://htncnews.netlify.app/.
+> [!WARNING]
+> The first request you make to the API may take a minute or so to resolve as the demo server spins up. The server will spin down if there haven't been any requests to the API in the last 15 minutes. After the server starts, there shouldn't be any more delays.
+
+
+---
 
 This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
