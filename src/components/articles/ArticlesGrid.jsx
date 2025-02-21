@@ -9,8 +9,8 @@ import setPhotoData from "../../utils/setPhotoData";
 import Error from "../Error";
 
 export default function ArticlesGrid({
+  descending,
   sort_by,
-  order,
   category,
   limit = 12,
   offset = 0,
@@ -19,7 +19,7 @@ export default function ArticlesGrid({
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const order = descending ? "desc" : "asc";
   useEffect(() => {
     setError(null);
     setLoading(true);
@@ -53,7 +53,7 @@ export default function ArticlesGrid({
         setError(error);
         setLoading(false);
       });
-  }, [category]);
+  }, [category, sort_by, descending]);
 
   if (error) return <Error title={error.error} message={error.msg} />;
   if (loading) return <DummyGrid count={+limit === 0 ? 12 : limit} />;
