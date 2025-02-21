@@ -1,4 +1,4 @@
-import { CaretCircleDown, CaretCircleUp } from "@phosphor-icons/react";
+import { List, X } from "@phosphor-icons/react";
 import { useState } from "react";
 import SortAndFilterControls from "./SortAndFilterControls";
 
@@ -12,8 +12,8 @@ export default function StickyCollapseBar({
   return (
     <menu
       className={
-        "sticky top-0 -mt-5 z-50 flex items-center gap-1" +
-        (showBar ? " py-5 bg-primary-50" : "absolute mt-0 h-0")
+        "sticky top-0 -mt-3 z-50 flex items-center gap-1 bg-primary-50" +
+        (showBar ? " pt-3 pb-4" : " pt-4 pb-3 px-1")
       }
     >
       {showBar ? (
@@ -25,18 +25,14 @@ export default function StickyCollapseBar({
       ) : null}
       <button
         className={
-          "-me-8 text-2xl text-primary-400 cursor-pointer hover:opacity-80" +
-          (!showBar ? " pt-8 ms-auto" : "")
+          "-me-8 text-2xl text-primary-500 cursor-pointer" +
+          (!showBar ? " ms-auto" : "")
         }
         onClick={() => {
           setShowBar(!showBar);
         }}
       >
-        {showBar ? (
-          <CaretCircleUp weight="fill" />
-        ) : (
-          <CaretCircleDown weight="fill" />
-        )}
+        {showBar ? <X /> : <List />}
         <span className="sr-only">Toggle Control Bar</span>
       </button>
     </menu>
