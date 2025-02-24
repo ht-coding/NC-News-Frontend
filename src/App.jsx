@@ -8,6 +8,8 @@ import { useContext, useEffect, useState } from "react";
 import { CategoriesContext } from "./contexts/Categories";
 import Loader from "./components/UI/Loader";
 import Error from "./components/Error";
+import { GithubLogo, LineVertical } from "@phosphor-icons/react";
+import NorthCoders from "./components/NorthCoders";
 
 function App() {
   const { setCategories } = useContext(CategoriesContext);
@@ -93,6 +95,37 @@ function App() {
           />
         </Routes>
       </main>
+      <footer className="flex flex-col items-center max-w-[1280px] mx-auto text-primary-50 mb-3 gap-1">
+        <p className="flex items-center">
+          <GithubLogo className="bg-primary-50 text-primary-900 text-2xl me-2  aspect-square rounded-full p-1 inline" />
+          <a
+            href="https://github.com/captainharrie/NC-News-Frontend"
+            className="hover:underline font-bold"
+          >
+            View Frontend Repository On GitHub
+          </a>
+          <GithubLogo className="bg-primary-50 text-primary-900 text-2xl mx-2  aspect-square rounded-full p-1 inline" />
+          <a
+            href="https://github.com/captainharrie/NC-News-Backend"
+            className="hover:underline font-bold"
+          >
+            View Backend Repository On GitHub
+          </a>
+        </p>
+        <p>
+          <NorthCoders className="w-8 mx-3 aspect-square bg-primary-50 p-1 rounded-full inline align-middle" />
+          This portfolio project was created as part of a Digital Skills
+          Bootcamp in Software Engineering provided by{" "}
+          <a
+            href="https://northcoders.com/"
+            className="hover:underline font-bold"
+            target="_blank"
+          >
+            Northcoders
+          </a>
+          .
+        </p>
+      </footer>
     </>
   );
 }
