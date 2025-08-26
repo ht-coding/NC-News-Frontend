@@ -9,7 +9,7 @@
 </p>
 
 > [!NOTE]
-> This is a full stack project. The backend repository for this project can be found here: https://github.com/ht-coding/NC-news.
+> This is a full stack project. The backend repository for this project can be found here: https://github.com/ht-coding/NC-News-Backend/.
 
 ## Live Demo
 A demo version of the API is hosted at https://htncnews.netlify.app/.
