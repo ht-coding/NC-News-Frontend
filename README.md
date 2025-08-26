@@ -1,4 +1,4 @@
-# NorthCoders News Frontend
+# Northcoders News Frontend
 <p align="center">
  <a href="https://northcoders.com/"><img src="https://img.shields.io/badge/NorthCoders-EB1C24?style=for-the-badge&logo=javascript&logoColor=white" alt="northcoders"></a>
  <a href="https://nodejs.org/en"><img src="https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node"></a>
@@ -9,7 +9,7 @@
 </p>
 
 > [!NOTE]
-> This is a full stack project. The backend repository for this project can be found here: https://github.com/captainharrie/NC-news.
+> This is a full stack project. The backend repository for this project can be found here: https://github.com/ht-coding/NC-news.
 
 ## Live Demo
 A demo version of the API is hosted at https://htncnews.netlify.app/.
